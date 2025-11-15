@@ -2,6 +2,9 @@ package Model;
 
 import java.util.LinkedList;
 
+
+import java.util.LinkedList;
+
 public class Order {
     private int orderId;
     private int customerId;
@@ -17,12 +20,23 @@ public class Order {
     public LinkedList<MenuItem> getItems() { return items; }
 
     public void addItem(MenuItem item) { items.add(item); }
+
     public void removeItem(int id) {
         items.removeIf(i -> i.getId() == id);
     }
 
+
+    public double getTotal() {
+        double total = 0;
+        for (MenuItem item : items) {
+            total += item.getPrice();
+        }
+        return total;
+    }
+
     @Override
     public String toString() {
-        return "Order: " + orderId + " | Customer: " + customerId + " | Items: " + items.size();
+        return "Order " + orderId + " | Customer: " + customerId + " | Items: " + items.size()
+                + " | Total: ₹" + getTotal();
     }
 }
